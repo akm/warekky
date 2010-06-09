@@ -101,12 +101,27 @@ describe "Warekky" do
   end
 
   describe :[] do
-    it "should return an Era object" do
-      [:meiji, :taisho, :showa, :heisei].each do |era|
-        Warekky[era].class.should == Warekky::Era
-        Warekky[era.to_s].class.should == Warekky::Era
+    describe "should return an Era object" do
+      it "for era_name" do
+        [:meiji, :taisho, :showa, :heisei].each do |era|
+          Warekky[era].class.should == Warekky::Era
+          Warekky[era.to_s].class.should == Warekky::Era
+        end
+        Warekky[:unexist_era].should == nil
       end
-      Warekky[:unexist_era].should == nil
+
+      it "for date" do
+        Warekky[Date.new(1867,12,31)].should == nil
+        Warekky[Date.new(1868, 1, 1)].name.should == 'meiji'
+        Warekky[Date.new(1912, 7,29)].name.should == 'meiji'
+        Warekky[Date.new(1912, 7,30)].name.should == 'taisho'
+        Warekky[Date.new(1926,12,24)].name.should == 'taisho'
+        Warekky[Date.new(1926,12,25)].name.should == 'showa'
+        Warekky[Date.new(1989, 1, 7)].name.should == 'showa'
+        Warekky[Date.new(1989, 1, 8)].name.should == 'heisei'
+        Warekky[Date.new(2010, 6, 9)].name.should == 'heisei'
+        Warekky[Date.new(2050,12,31)].name.should == 'heisei'
+      end
     end
   end
 end
