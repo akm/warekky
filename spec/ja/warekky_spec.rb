@@ -4,7 +4,7 @@ require File.expand_path('../spec_helper', File.dirname(__FILE__))
 describe "Warekky" do
 
   before :all do
-    Warekky.default_era_group = :ja
+    Warekky.era_group_class = Warekky::Ja
   end
   
   describe :strftime do
