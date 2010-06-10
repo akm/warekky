@@ -27,6 +27,9 @@ module Warekky
     end
 
     def parse(str, options = {})
+      options = {
+        :class => Date
+      }.update(options || {})
       str = str.dup
       replacements_before_parse.each_with_index do |dic, idx|
         str.gsub!(replacements_regexp_before_parse[idx]){|s| dic[s]}
@@ -41,7 +44,7 @@ module Warekky
         raise ArgumentError, "Era not found for #{s.inspect}" unless era
         era.to_ad_year(h[s]).to_s
       end
-      Date.parse(str)
+      options[:class].parse(str)
     end
 
     def strftime(d, format)

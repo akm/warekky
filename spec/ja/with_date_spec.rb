@@ -59,6 +59,24 @@ describe "Warekky" do
 			Warekky.parse("H62/12/31").should == Date.new(2050,12,31)
     end
 
+    context "区切りなし" do
+      it "by Time.parse" do
+        Date.parse("18671231").should == Date.new(1867, 12, 31)
+      end
+
+      it "by Warekky.parse" do
+        Warekky.parse("M010101", :class => Date).should == Date.new(1868, 1, 1)
+				Warekky.parse("M450729", :class => Date).should == Date.new(1912, 7,29)
+				Warekky.parse("T010730", :class => Date).should == Date.new(1912, 7,30)
+				Warekky.parse("T151224", :class => Date).should == Date.new(1926,12,24)
+				Warekky.parse("S011225", :class => Date).should == Date.new(1926,12,25)
+				Warekky.parse("S640107", :class => Date).should == Date.new(1989, 1, 7)
+				Warekky.parse("H010108", :class => Date).should == Date.new(1989, 1, 8)
+				Warekky.parse("H220609", :class => Date).should == Date.new(2010, 6, 9)
+				Warekky.parse("H621231", :class => Date).should == Date.new(2050,12,31)
+      end
+    end
+
     it "with chinese charactor era name (漢字表記の元号)" do
 			Warekky.parse("明治元年1月1日").should == Date.new(1868, 1, 1)
 			Warekky.parse("明治1年1月1日").should == Date.new(1868, 1, 1)

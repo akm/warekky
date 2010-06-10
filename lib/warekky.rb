@@ -1,4 +1,5 @@
 require 'date'
+require 'time'
 
 module Warekky
   autoload :Era, 'warekky/era'
