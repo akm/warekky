@@ -22,6 +22,11 @@ module Warekky
       @options[option_key]
     end
 
+    def to_ad_year(era_year)
+      era_year = era_year.to_i
+      @first.year - 1 + era_year
+    end
+
     private
     def to_date(obj)
       return nil unless obj

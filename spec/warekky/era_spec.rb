@@ -60,6 +60,23 @@ describe Warekky::Era do
         era.match?(str).should == expected
       end
     end
+  end
 
+  describe :to_ad_year do
+    it "should return ad year" do
+      era = Warekky::Era.new(:meiji , 'M', '1868/01/01', '1912/07/29')
+      era.to_ad_year(1).should == 1868
+      era.to_ad_year("1").should == 1868
+      era.to_ad_year(2).should == 1869
+      era.to_ad_year(45).should == 1912
+    end
+
+    it "should return ad year for out of range" do
+      era = Warekky::Era.new(:meiji , 'M', '1868/01/01', '1912/07/29')
+      era.to_ad_year(-1).should == 1866
+      era.to_ad_year(0).should == 1867
+      era.to_ad_year(46).should == 1913
+      era.to_ad_year(50).should == 1917
+    end
   end
 end

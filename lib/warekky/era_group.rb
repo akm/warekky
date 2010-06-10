@@ -9,12 +9,14 @@ module Warekky
     def name_to_era
       self.class.name_to_era
     end
+    def era_replacements
+      self.class.era_replacements
+    end
 
     def era_extra_names
       # インスタンスでは変更できないようにするので、引数を渡しません
       self.class.era_extra_names
     end
-
 
     def parse(str, options = {})
       raise NotImplementedError, "#{self.class.name}#parse has not been implemented."
@@ -65,6 +67,10 @@ module Warekky
         @regexp_builder = block
       end
       
+      def era_replacements
+        @era_replacements ||= Regexp.union(eras.map(&regexp_builder).flatten)
+      end
+
     end
 
   end
