@@ -59,31 +59,31 @@ describe "Warekky" do
     end
     
     it "with chinese charactor era name (漢字表記の元号)" do
-			Warekky.parse("明治元年1月1日").should ==Date.new(1868, 1, 1)
-			Warekky.parse("明治1年1月1日").should ==Date.new(1868, 1, 1)
-			Warekky.parse("明治01年01月01日").should ==Date.new(1868, 1, 1)
-			Warekky.parse("明治45年07月29日").should ==Date.new(1912, 7,29)
-			Warekky.parse("大正01年07月30日").should ==Date.new(1912, 7,30)
-			Warekky.parse("大正15年12月24日").should ==Date.new(1926,12,24)
-			Warekky.parse("昭和01年12月25日").should ==Date.new(1926,12,25)
-			Warekky.parse("昭和64年01月07日").should ==Date.new(1989, 1, 7)
-			Warekky.parse("平成01年01月08日").should ==Date.new(1989, 1, 8)
-			Warekky.parse("平成22年06月09日").should ==Date.new(2010, 6, 9)
-			Warekky.parse("平成62年12月31日").should ==Date.new(2050,12,31)
+			Warekky.parse("明治元年1月1日").should == Date.new(1868, 1, 1)
+			Warekky.parse("明治1年1月1日").should == Date.new(1868, 1, 1)
+			Warekky.parse("明治01年01月01日").should == Date.new(1868, 1, 1)
+			Warekky.parse("明治45年07月29日").should == Date.new(1912, 7,29)
+			Warekky.parse("大正01年07月30日").should == Date.new(1912, 7,30)
+			Warekky.parse("大正15年12月24日").should == Date.new(1926,12,24)
+			Warekky.parse("昭和01年12月25日").should == Date.new(1926,12,25)
+			Warekky.parse("昭和64年01月07日").should == Date.new(1989, 1, 7)
+			Warekky.parse("平成01年01月08日").should == Date.new(1989, 1, 8)
+			Warekky.parse("平成22年06月09日").should == Date.new(2010, 6, 9)
+			Warekky.parse("平成62年12月31日").should == Date.new(2050,12,31)
     end
 
     it "with chinese charactor short era name (漢字省略表記の元号)" do
-			Warekky.parse("明元年1月1日").should ==Date.new(1868, 1, 1)
-			Warekky.parse("明1年1月1日").should ==Date.new(1868, 1, 1)
-			Warekky.parse("明01年01月01日").should ==Date.new(1868, 1, 1)
-			Warekky.parse("明45年07月29日").should ==Date.new(1912, 7,29)
-			Warekky.parse("大01年07月30日").should ==Date.new(1912, 7,30)
-			Warekky.parse("大15年12月24日").should ==Date.new(1926,12,24)
-			Warekky.parse("昭01年12月25日").should ==Date.new(1926,12,25)
-			Warekky.parse("昭64年01月07日").should ==Date.new(1989, 1, 7)
-			Warekky.parse("平01年01月08日").should ==Date.new(1989, 1, 8)
-			Warekky.parse("平22年06月09日").should ==Date.new(2010, 6, 9)
-			Warekky.parse("平62年12月31日").should ==Date.new(2050,12,31)
+			Warekky.parse("明元年1月1日").should == Date.new(1868, 1, 1)
+			Warekky.parse("明1年1月1日").should == Date.new(1868, 1, 1)
+			Warekky.parse("明01年01月01日").should == Date.new(1868, 1, 1)
+			Warekky.parse("明45年07月29日").should == Date.new(1912, 7,29)
+			Warekky.parse("大01年07月30日").should == Date.new(1912, 7,30)
+			Warekky.parse("大15年12月24日").should == Date.new(1926,12,24)
+			Warekky.parse("昭01年12月25日").should == Date.new(1926,12,25)
+			Warekky.parse("昭64年01月07日").should == Date.new(1989, 1, 7)
+			Warekky.parse("平01年01月08日").should == Date.new(1989, 1, 8)
+			Warekky.parse("平22年06月09日").should == Date.new(2010, 6, 9)
+			Warekky.parse("平62年12月31日").should == Date.new(2050,12,31)
     end
 
   end
