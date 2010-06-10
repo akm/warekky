@@ -73,6 +73,7 @@ describe "Warekky" do
       Time.parse("H01/01/08").should == Time.local(1989, 1, 8)
       Time.parse("H22/06/09").should == Time.local(2010, 6, 9)
       Time.parse("H62/12/31").should == Time.local(2050,12,31)
+      Time.parse("H22/06/09 01:23:45").should == Time.local(2010, 6, 9, 1, 23, 45)
     end
 
     it "区切りなし" do
@@ -85,6 +86,8 @@ describe "Warekky" do
       Time.parse("H010108").should == Time.local(1989, 1, 8)
       Time.parse("H220609").should == Time.local(2010, 6, 9)
       Time.parse("H621231").should == Time.local(2050,12,31)
+      Time.parse("H220609 012345").should == Time.local(2010, 6, 9, 1, 23, 45)
+      Time.parse("H220609012345").should == Time.local(2010, 6, 9, 1, 23, 45)
     end
 
     it "with chinese charactor era name (漢字表記の元号)" do
@@ -99,6 +102,7 @@ describe "Warekky" do
       Time.parse("平成01年01月08日").should == Time.local(1989, 1, 8)
       Time.parse("平成22年06月09日").should == Time.local(2010, 6, 9)
       Time.parse("平成62年12月31日").should == Time.local(2050,12,31)
+      Time.parse("平成22年06月09日 12時34分56秒").should == Time.local(2010, 6, 9, 12, 34, 56)
     end
 
     it "with chinese charactor short era name (漢字省略表記の元号)" do
