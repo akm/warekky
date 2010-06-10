@@ -43,6 +43,50 @@ describe Warekky::EraGroup do
     end
   end
 
+  describe :[] do
+    before do
+      @era_group = VietnameseTest.new
+    end
+
+    describe "should return an Era object" do
+      it "for era_name" do
+        [:thanh_thai, :duy_tan, :khai_djnh, :bao_dai].each do |era|
+          @era_group[era].class.should == Warekky::Era
+          @era_group[era.to_s].class.should == Warekky::Era
+        end
+        @era_group[nil].should == nil
+        @era_group[''].should == nil
+        @era_group[:unexist_era].should == nil
+      end
+
+      it "for era_name with kanji" do
+        %w[成泰 維新 啓定 保大].each do |era|
+          @era_group[era].class.should == Warekky::Era
+        end
+      end
+
+      it "for date" do
+        @era_group[Date.new(1888,12,31)].should == nil
+        @era_group[Date.new(1889, 1, 1)].name.should == 'thanh_thai'
+        @era_group[Date.new(1906,12,31)].name.should == 'thanh_thai'
+        @era_group[Date.new(1907, 1, 1)].name.should == 'duy_tan'
+        @era_group[Date.new(1915,12,31)].name.should == 'duy_tan'
+        @era_group[Date.new(1916, 1, 1)].name.should == 'khai_djnh'
+        @era_group[Date.new(1925,12,31)].name.should == 'khai_djnh'
+        @era_group[Date.new(1926, 1, 1)].name.should == 'bao_dai'
+        @era_group[Date.new(1945,12,31)].name.should == 'bao_dai'
+        @era_group[Date.new(1946, 1, 1)].should == nil
+        @era_group[Date.new(2010, 6,10)].should == nil
+      end
+
+      it "should raise for number" do
+        lambda{
+          @era_group[1]
+        }.should raise_error(ArgumentError)
+      end
+    end
+  end
+
   describe :era_replacements do
     it "should match for names" do
       regexp1 = ChineseTest.era_replacements

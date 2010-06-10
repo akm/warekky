@@ -25,9 +25,6 @@ module Warekky
     def replacements_before_parse
       self.class.replacements_before_parse
     end
-    def era_extra_names
-      self.class.era_extra_names
-    end
 
     def parse(str, options = {})
       str = str.dup
