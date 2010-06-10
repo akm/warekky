@@ -9,7 +9,7 @@ describe Warekky::Era do
 
   describe :[] do
     it "access to options" do
-      era = Warekky::Era.new(:meiji , 'M', 
+      era = Warekky::Era.new(:meiji , 'M',
         '1868/01/01', '1912/07/29', :long => '明治', :short => "明")
       era[:long].should == "明治"
       era[:short].should == "明"
@@ -24,7 +24,7 @@ describe Warekky::Era do
   describe :match? do
     it "both first and last" do
       era = Warekky::Era.new(:both, "B", "1993/04/01", "1998/03/31")
-      { 
+      {
         "1993/03/31" => false,
         "1993/04/01" => true,
         "1998/03/31" => true,
@@ -37,7 +37,7 @@ describe Warekky::Era do
 
     it "only first" do
       era = Warekky::Era.new(:fitst, "F", "1993/04/01", nil)
-      { 
+      {
         "1993/03/31" => false,
         "1993/04/01" => true,
         "1998/03/31" => true,
@@ -50,7 +50,7 @@ describe Warekky::Era do
 
     it "only last" do
       era = Warekky::Era.new(:last, "L", nil, "1998/03/31")
-      { 
+      {
         "1993/03/31" => true,
         "1993/04/01" => true,
         "1998/03/31" => true,

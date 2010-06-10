@@ -83,7 +83,7 @@ module Warekky
       def regexp(&block)
         @regexp_builder = block
       end
-      
+
       def era_replacements
         @era_replacements ||= Regexp.union(eras.map(&regexp_builder).flatten)
       end
@@ -97,7 +97,7 @@ module Warekky
       end
 
       def formats_regexp
-        @formats_regexp ||= 
+        @formats_regexp ||=
           Regexp.union(*formats.map{|(k,v)| /(#{Regexp.escape(k)})/})
       end
 

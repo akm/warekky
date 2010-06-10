@@ -6,7 +6,7 @@ describe "Warekky" do
   before :all do
     Warekky.era_group_class = Warekky::Ja
   end
-  
+
   describe :strftime do
     it "without era name (元号の指定なし)" do
       Warekky.strftime(Date.new(1867,12,31), '%Y.%m.%d').should == "1867.12.31"
@@ -58,7 +58,7 @@ describe "Warekky" do
 			Warekky.parse("H22/06/09").should == Date.new(2010, 6, 9)
 			Warekky.parse("H62/12/31").should == Date.new(2050,12,31)
     end
-    
+
     it "with chinese charactor era name (漢字表記の元号)" do
 			Warekky.parse("明治元年1月1日").should == Date.new(1868, 1, 1)
 			Warekky.parse("明治1年1月1日").should == Date.new(1868, 1, 1)

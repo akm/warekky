@@ -15,7 +15,7 @@ require 'warekky'
 # 1868/01/01, 1912/07/29 明治 - 45 # グレゴリオ暦では 1868/1/25 から明治元年。
 #	1912/07/30, 1926/12/24 大正 - 15
 #	1926/12/25, 1989/01/07 昭和 - 64
-#	1989/01/08,	---------- 平成 
+#	1989/01/08,	---------- 平成
 
 module Warekky
   class Ja < EraGroup
@@ -31,7 +31,7 @@ module Warekky
 		format('%G'){|era, era_year| era[:long] if era}
     format('%g'){|era, era_year| era.sign if era}
 		format('%n'){|era, era_year| '%02d' % era_year}
-    
+
     era('1868/01/01', '1912/07/29', :meiji , 'M', :long => '明治', :short => "明")
     era('1912/07/30', '1926/12/24', :taisho, 'T', :long => '大正', :short => "大")
     era('1926/12/25', '1989/01/07', :showa , 'S', :long => '昭和', :short => "昭")
@@ -86,7 +86,7 @@ module Warekky
     private
 
     def replacements_regexp_before_parse
-      @replacements_regexp_before_parse ||= 
+      @replacements_regexp_before_parse ||=
         replacements_before_parse.map{|replacements|
         Regexp.union(*replacements.keys.map{|s| /(#{Regexp.escape(s)})/})}
     end

@@ -3,7 +3,7 @@ require File.expand_path('../spec_helper', File.dirname(__FILE__))
 
 class ChineseTest < Warekky::EraGroup
   # see http://ja.wikipedia.org/wiki/元号一覧_(中国)
-  # pronounciation found on 
+  # pronounciation found on
   # http://www.mdbg.net/chindict/chindict.php?dss=1&wdrst=1&wdqchi=宣統
 
   regexp do |era|
