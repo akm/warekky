@@ -9,19 +9,23 @@ module Warekky
 
   class << self
     attr_accessor :era_group_class
-    attr_reader :era_group
+    attr_accessor :era_group
 
     # d: Date or Time
     def strftime(d, format)
-      era_group ? era_group.strftime(d, format) : d.strftime(format)
+      era_group ? 
+        era_group.strftime(d, format) : 
+        d.strftime(format)
     end
 
     def parse(str, options = {})
-      era_group ? era_group.parse(str, options) : DateTime.parse(str)
+      era_group ? 
+        era_group.parse(str, options) : 
+        try_without(DateTime, :parse, str)
     end
 
     def era_group
-      @era_group ||= era_group_class.new
+      @era_group ||= (era_group_class ? era_group_class.new : nil)
     end
 
     def [](era_name_or_date_or_time)
