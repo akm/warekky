@@ -21,7 +21,7 @@ module Warekky
   class Ja < EraGroup
     era_extra_names :long, :short
 
-    regexp do |era|
+    parse_regexp do |era|
       [ /(#{Regexp.escape(era.name)})(\d{1,2})/,
 				/(#{Regexp.escape(era.sign)})(\d{1,2})/,
 				/(#{Regexp.escape(era[:short])})(\d{1,2})/,

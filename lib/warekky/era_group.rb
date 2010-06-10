@@ -79,13 +79,15 @@ module Warekky
         result
       end
 
-      attr_accessor :regexp_builder
-      def regexp(&block)
-        @regexp_builder = block
+      
+
+      attr_accessor :parse_regexp_builder
+      def parse_regexp(&block)
+        @parse_regexp_builder = block
       end
 
       def era_replacements
-        @era_replacements ||= Regexp.union(eras.map(&regexp_builder).flatten)
+        @era_replacements ||= Regexp.union(eras.map(&parse_regexp_builder).flatten)
       end
 
       def formats

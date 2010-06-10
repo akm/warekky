@@ -6,7 +6,7 @@ class ChineseTest < Warekky::EraGroup
   # pronounciation found on
   # http://www.mdbg.net/chindict/chindict.php?dss=1&wdrst=1&wdqchi=宣統
 
-  regexp do |era|
+  parse_regexp do |era|
     [ /(?:#{Regexp.escape(era.name)})(?:\d{1,2})/,
       /(?:#{Regexp.escape(era.sign)})(?:\d{1,2})/]
   end
