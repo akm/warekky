@@ -1,17 +1,26 @@
 = warekky
 
-Description goes here.
+warekkyは和暦サポートのためのライブラリです。
+和暦の日付と西暦の日付を相互に変換できます。
 
-== Note on Patches/Pull Requests
+== Install
+ $ [sudo] gem install warekky
+
+== Simple Usage
+ $ irb
+ require 'warekky'
+ #=> true
  
-* Fork the project.
-* Make your feature addition or bug fix.
-* Add tests for it. This is important so I don't break it in a
-  future version unintentionally.
-* Commit, do not mess with rakefile, version, or history.
-  (if you want to have your own version, that is fine but bump version in a commit by itself I can ignore when I pull)
-* Send me a pull request. Bonus points for topic branches.
+ Date.new(2010, 6, 10).strftime("%g%n/%m/%d")
+ #=> "H22/06/10"
+ 
+ Time.parse("H22/06/10 19:07:20")
+ #=> Thu Jun 10 19:07:20 0900 2010
+ 
+ Time.now.era.name
+ #=> "heisei"
+
 
 == Copyright
 
-Copyright (c) 2010 akimatter. See LICENSE for details.
+Copyright (c) 2010 Takeshi AKIMA. See LICENSE for details.
