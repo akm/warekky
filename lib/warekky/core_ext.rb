@@ -4,13 +4,17 @@ module Warekky
   module CoreExt
     def self.included(klass)
       klass.extend(ClassMethods)
-      klass.instance_eval do
-        alias :parse_without_warekky :parse
-        alias :parse :parse_with_warekky
+      unless klass.respond_to?(:parse_without_warekky)
+        klass.instance_eval do
+          alias :parse_without_warekky :parse
+          alias :parse :parse_with_warekky
+        end
       end
-      klass.module_eval do
-        alias_method :strftime_without_warekky, :strftime
-        alias_method :strftime, :strftime_with_warekky
+      unless klass.instance_methods.include?('strftime_without_warekky')
+        klass.module_eval do
+          alias_method :strftime_without_warekky, :strftime
+          alias_method :strftime, :strftime_with_warekky
+        end
       end
     end
 
@@ -20,7 +24,7 @@ module Warekky
       end
 
       def parse_with_warekky(str)
-        eras.parse(str)
+        eras.parse(str, :class => self)
       end
     end
 
@@ -33,7 +37,12 @@ module Warekky
     end
     
     def self.setup
-      ::Date.send(:include, self)
+      [::Time, ::Date].each do |klass|
+        klass.send(:include, self)
+      end
+      ::DateTime.instance_eval do
+        alias :parse :parse_with_warekky
+      end
     end
 
   end
