@@ -27,6 +27,11 @@ module Warekky
       @first.year - 1 + era_year
     end
 
+    def to_era_year(ad_year)
+      ad_year = ad_year.to_i
+      ad_year - @first.year + 1
+    end
+
     private
     def to_date(obj)
       return nil unless obj
