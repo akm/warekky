@@ -42,6 +42,22 @@ describe "Warekky" do
     end
   end
 
+
+  describe :era do
+    it "should return an era for date" do
+      Date.new(1867,12,31).era.should == nil
+      Date.new(1868, 1, 1).era.name.should == 'meiji'
+      Date.new(1912, 7,29).era.name.should == 'meiji'
+      Date.new(1912, 7,30).era.name.should == 'taisho'
+      Date.new(1926,12,24).era.name.should == 'taisho'
+      Date.new(1926,12,25).era.name.should == 'showa'
+      Date.new(1989, 1, 7).era.name.should == 'showa'
+      Date.new(1989, 1, 8).era.name.should == 'heisei'
+      Date.new(2010, 6, 9).era.name.should == 'heisei'
+      Date.new(2050,12,31).era.name.should == 'heisei'
+    end
+  end
+
   describe :parse do
     it "without era name (元号の指定なし)" do
       Date.parse("1867/12/31").should == Date.new(1867,12,31)

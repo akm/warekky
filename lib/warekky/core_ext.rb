@@ -28,6 +28,10 @@ module Warekky
       self.class.eras.strftime(self, format)
     end
     
+    def era
+      self.class.eras[self]
+    end
+    
     def self.setup
       ::Date.send(:include, self)
     end
