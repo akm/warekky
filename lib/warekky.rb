@@ -7,6 +7,7 @@ module Warekky
 
   class << self
     attr_accessor :era_group_class
+    attr_reader :era_group
 
     # d: Date or Time
     def strftime(d, format)
@@ -15,7 +16,12 @@ module Warekky
     def parse(str)
     end
 
+    def era_group
+      @era_group ||= era_group_class.new
+    end
+
     def [](era_name_or_date_or_time)
+      era_group[era_name_or_date_or_time]
     end
 
   end
