@@ -11,6 +11,9 @@ class ChineseTest < Warekky::EraGroup
       /(?:#{Regexp.escape(era.sign)})(?:\d{1,2})/]
   end
 
+  format('%G'){|era, era_year| era.sign if era}
+  format('%n'){|era, era_year| era_year}
+
   era('1862/01/01', '1974/12/31', :tongzhi , '同治')
   era('1875/01/01', '1908/12/31', :guangxu , '光緒')
   era('1909/01/01', '1912/02/12', :xuantong, '宣統')
@@ -54,6 +57,20 @@ describe Warekky::EraGroup do
       regexp1.match("光緒34").should be_true
       regexp1.match("宣統1").should be_true
       regexp1.match("宣統3").should be_true
+    end
+  end
+
+  describe :formats_regexp do
+    it "should match for format" do
+      regexp1 = ChineseTest.formats_regexp
+      regexp1.match("%g").should be_false
+      regexp1.match("%G").should be_true
+      regexp1.match("%N").should be_false
+      regexp1.match("%n").should be_true
+      regexp1.match("%y").should be_false
+      regexp1.match("%Y").should be_false
+
+      regexp1.match("%g%n/%m/%d").should be_true
     end
   end
 

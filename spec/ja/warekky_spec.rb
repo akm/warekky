@@ -9,12 +9,13 @@ describe "Warekky" do
   
   describe :strftime do
     it "without era name (元号の指定なし)" do
-      Warekky.strftime(Date.new(1867,12,31), '%y.%m.%d').should == "1867.12.31"
+      Warekky.strftime(Date.new(1867,12,31), '%Y.%m.%d').should == "1867.12.31"
+      Warekky.strftime(Date.new(1868, 1, 1), '%Y.%m.%d').should == "1868.01.01"
     end
 
     it "with alphabet era name (アルファベット表記の元号)" do
       fmt = '%g%n/%m/%d'
-      Warekky.strftime(Date.new(1867,12,31), fmt).should == "1867/01/01"
+      Warekky.strftime(Date.new(1867,12,31), fmt).should == "1867/12/31"
       Warekky.strftime(Date.new(1868, 1, 1), fmt).should == "M01/01/01"
 			Warekky.strftime(Date.new(1912, 7,29), fmt).should == "M45/07/29"
 			Warekky.strftime(Date.new(1912, 7,30), fmt).should == "T01/07/30"
@@ -28,7 +29,7 @@ describe "Warekky" do
 
     it "with chinese charactor era name (漢字表記の元号)" do
       fmt = '%G%n/%m/%d'
-      Warekky.strftime(Date.new(1867,12,31), fmt).should == "1867/01/01"
+      Warekky.strftime(Date.new(1867,12,31), fmt).should == "1867/12/31"
 			Warekky.strftime(Date.new(1868, 1, 1), fmt).should == "明治01/01/01"
 			Warekky.strftime(Date.new(1912, 7,29), fmt).should == "明治45/07/29"
 			Warekky.strftime(Date.new(1912, 7,30), fmt).should == "大正01/07/30"

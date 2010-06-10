@@ -11,6 +11,7 @@ module Warekky
 
     # d: Date or Time
     def strftime(d, format)
+      era_group ? era_group.strftime(d, format) : d.strftime(format)
     end
 
     def parse(str, options = {})

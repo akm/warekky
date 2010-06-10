@@ -27,6 +27,10 @@ module Warekky
 				/(#{Regexp.escape(era[:short])})(\d{1,2})/,
 				/(#{Regexp.escape(era[:long])})(\d{1,2})/]
     end
+
+		format('%G'){|era, era_year| era[:long] if era}
+    format('%g'){|era, era_year| era.sign if era}
+		format('%n'){|era, era_year| '%02d' % era_year}
     
     era('1868/01/01', '1912/07/29', :meiji , 'M', :long => '明治', :short => "明")
     era('1912/07/30', '1926/12/24', :taisho, 'T', :long => '大正', :short => "大")
@@ -37,6 +41,7 @@ module Warekky
       {"元年" => "1年"}.freeze,
       {"年" => ".", "月" => ".", "日" => ""}.freeze
     ].freeze
+
 
     attr_accessor :replacements_before_parse
 
@@ -50,7 +55,7 @@ module Warekky
         str.gsub!(replacements_regexp_before_parse[idx]){|s| dic[s]}
       end
       era_dic = name_to_era
-      str.gsub!(era_replacements){
+      str.gsub!(era_replacements) do
         md = Regexp.last_match
         h = Hash[*md.captures]
         h.delete(nil)
@@ -58,8 +63,24 @@ module Warekky
         era = era_dic[s]
         raise ArgumentError, "Era not found for #{s.inspect}" unless era
         era.to_ad_year(h[s]).to_s
-      }
+      end
       Date.parse(str)
+    end
+
+    def strftime(d, format)
+      return d.strftime(format) unless formats_regexp.match(format)
+      era = self[d]
+      era_year = era ? era.to_era_year(d.year) : d.year
+      format = format.dup
+      format.gsub!(formats_regexp) do
+        md = Regexp.last_match
+        s = md.captures.compact.first
+        rep = formats[s]
+        raise ArgumentError, "replacement not found for #{s.inspect}" unless rep
+        res = rep.call(era, era_year)
+        res
+      end
+      d.strftime(format)
     end
 
     private

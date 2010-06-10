@@ -3,6 +3,10 @@ require 'warekky'
 
 module Warekky
   class EraGroup
+    def initialize
+      @formats = self.class.formats.dup
+    end
+
     def eras
       self.class.eras
     end
@@ -12,22 +16,35 @@ module Warekky
     def era_replacements
       self.class.era_replacements
     end
+    def formats
+      self.class.formats
+    end
+    def formats_regexp
+      self.class.formats_regexp
+    end
 
     def era_extra_names
       # インスタンスでは変更できないようにするので、引数を渡しません
       self.class.era_extra_names
     end
 
+    def strftime(d, format = {})
+      raise NotImplementedError, "#{self.class.name}#strftime is not implemented."
+    end
+
     def parse(str, options = {})
-      raise NotImplementedError, "#{self.class.name}#parse has not been implemented."
+      raise NotImplementedError, "#{self.class.name}#parse is not implemented."
     end
 
     def [](era_name_or_date_or_time)
+      return nil unless era_name_or_date_or_time
       case era_name_or_date_or_time
       when Symbol, String then
         name_to_era[era_name_or_date_or_time]
       when Time, Date then
         eras.detect{|era| era.match?(era_name_or_date_or_time)}
+      else
+        raise ArgumentError, "#{self.class.name}#[] doesn't support #{era_name_or_date_or_time.inspect}"
       end
     end
 
@@ -69,6 +86,19 @@ module Warekky
       
       def era_replacements
         @era_replacements ||= Regexp.union(eras.map(&regexp_builder).flatten)
+      end
+
+      def formats
+        @formats ||= {}
+      end
+
+      def format(pattern, &block)
+        formats[pattern] = block
+      end
+
+      def formats_regexp
+        @formats_regexp ||= 
+          Regexp.union(*formats.map{|(k,v)| /(#{Regexp.escape(k)})/})
       end
 
     end
