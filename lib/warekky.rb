@@ -13,7 +13,8 @@ module Warekky
     def strftime(d, format)
     end
 
-    def parse(str)
+    def parse(str, options = {})
+      era_group ? era_group.parse(str, options) : DateTime.parse(str)
     end
 
     def era_group

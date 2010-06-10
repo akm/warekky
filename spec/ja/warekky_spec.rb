@@ -95,7 +95,15 @@ describe "Warekky" do
           Warekky[era].class.should == Warekky::Era
           Warekky[era.to_s].class.should == Warekky::Era
         end
+        Warekky[nil].should == nil
+        Warekky[''].should == nil
         Warekky[:unexist_era].should == nil
+      end
+
+      it "for era_name with kanji" do
+        %w[M T S H 明治 大正 昭和 平成 明 大 昭 平].each do |era|
+          Warekky[era].class.should == Warekky::Era
+        end
       end
 
       it "for date" do

@@ -6,7 +6,7 @@ module Warekky
     def initialize(key, sign, first, last, options = {})
       @key, @sign = key.to_sym, sign.to_s.freeze
       @first, @last = to_date(first), to_date(last)
-      @options = options.freeze
+      @options = (options || {}).freeze
     end
 
     def name
@@ -16,6 +16,10 @@ module Warekky
     def match?(d)
       d = to_date(d)
       (@first ? @first <= d : true) && (@last ? @last >= d : true)
+    end
+
+    def [](option_key)
+      @options[option_key]
     end
 
     private

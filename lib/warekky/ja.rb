@@ -19,10 +19,44 @@ require 'warekky'
 
 module Warekky
   class Ja < EraGroup
+    era_extra_names :long, :short
+
+    regexp do |era|
+      Regexp.union(
+        /(#{era.name})(\d{1,2})/,
+        /(#{era[:short]})(\d{1,2})/,
+        /(#{era[:long]})(\d{1,2})/)
+    end
+    
     era('1868/01/01', '1912/07/29', :meiji , 'M', :long => '明治', :short => "明")
     era('1912/07/30', '1926/12/24', :taisho, 'T', :long => '大正', :short => "大")
     era('1926/12/25', '1989/01/07', :showa , 'S', :long => '昭和', :short => "昭")
     era('1989/01/08', nil					, :heisei, 'H', :long => '平成', :short => "平")
-    
+
+    DEFAULT_REPLACEMENTS_BEFORE_PARSE = { 
+      "元年" => "1年"
+    }.freeze
+
+    attr_accessor :replacements_before_parse
+
+    def initialize
+      @replacements_before_parse = DEFAULT_REPLACEMENTS_BEFORE_PARSE.dup
+    end
+
+    def parse(str, options = {})
+      dic = replacements_before_parse
+      str.gsub(replacements_regexp_before_parse){|s| dic[s]}
+      era_dic = name_to_era
+      era_replacements = Regexp.union(eras.map(&self.class.regexp_builder))
+      str.gsub(era_replacements){|s, y| era_dic[y]}
+    end
+
+    private
+
+    def replacements_regexp_before_parse
+      @replacements_regexp_before_parse ||= 
+        Regexp.union(*replacements_before_parse.keys.map{|s| /(#{Regexp.escape(s)})/})
+    end
+
   end
 end

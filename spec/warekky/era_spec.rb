@@ -7,6 +7,20 @@ describe Warekky::Era do
     Warekky.era_group_class = nil
   end
 
+  describe :[] do
+    it "access to options" do
+      era = Warekky::Era.new(:meiji , 'M', 
+        '1868/01/01', '1912/07/29', :long => '明治', :short => "明")
+      era[:long].should == "明治"
+      era[:short].should == "明"
+      era['long'].should == nil
+      era['short'].should == nil
+      era[:unexist].should == nil
+      era[''].should == nil
+      era[nil].should == nil
+    end
+  end
+
   describe :match? do
     it "both first and last" do
       era = Warekky::Era.new(:both, "B", "1993/04/01", "1998/03/31")
