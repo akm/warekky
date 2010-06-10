@@ -35,11 +35,11 @@ module Warekky
         raise ArgumentError, "Era not found for #{s.inspect}" unless era
         era.to_ad_year(h[s]).to_s
       end
-      options[:class].parse(str)
+      Warekky.try_without(options[:class], :parse, str)
     end
 
     def strftime(d, format)
-      return d.strftime(format) unless formats_regexp.match(format)
+      return Warekky.try_without(d, :strftime, format) unless formats_regexp.match(format)
       era = self[d]
       era_year = era ? era.to_era_year(d.year) : d.year
       format = format.dup
@@ -51,7 +51,7 @@ module Warekky
         res = rep.call(era, era_year)
         res
       end
-      d.strftime(format)
+      Warekky.try_without(d, :strftime, format)
     end
 
     def [](era_name_or_date_or_time)

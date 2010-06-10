@@ -38,7 +38,7 @@ module Warekky
       return obj if obj.is_a?(Date)
       return Date.new(obj.year, obj.month, obj.day) if obj.is_a?(Time)
       return obj.to_date if respond_to?(:to_date)
-      Date.parse(obj.to_s)
+      Warekky.try_without(Date, :parse, obj.to_s)
     end
   end
 end
