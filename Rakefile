@@ -10,7 +10,7 @@ begin
     gem.description = %Q{Japanese Era(年号) library and Time, Date, DateTime extensions.}
     gem.email = "akm2000@gmail.com"
     gem.homepage = "http://github.com/akm/warekky"
-    gem.authors = ["akimatter"]
+    gem.authors = ["Takeshi AKIMA"]
     gem.add_development_dependency "rspec", ">= 1.2.9"
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
