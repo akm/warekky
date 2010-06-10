@@ -7,23 +7,14 @@ module Warekky
       @formats = self.class.formats.dup
     end
 
-    def eras
-      self.class.eras
-    end
-    def name_to_era
-      self.class.name_to_era
-    end
-    def era_replacements
-      self.class.era_replacements
-    end
-    def formats
-      self.class.formats
-    end
-    def formats_regexp
-      self.class.formats_regexp
-    end
-    def replacements_before_parse
-      self.class.replacements_before_parse
+    class_method_proxy_methods = %w[eras name_to_era era_replacements 
+      formats formats_regexp replacements_before_parse]
+    class_method_proxy_methods.each do |method_name|
+      module_eval(<<-"EOS")
+        def #{method_name}
+          self.class.#{method_name}
+        end
+      EOS
     end
 
     def parse(str, options = {})
