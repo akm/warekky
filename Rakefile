@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 require 'rubygems'
 require 'rake'
 
@@ -5,8 +6,8 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "warekky"
-    gem.summary = %Q{TODO: one-line summary of your gem}
-    gem.description = %Q{TODO: longer description of your gem}
+    gem.summary = %Q{Japanese Era(年号) library and Time, Date, DateTime extensions.}
+    gem.description = %Q{Japanese Era(年号) library and Time, Date, DateTime extensions.}
     gem.email = "akm2000@gmail.com"
     gem.homepage = "http://github.com/akm/warekky"
     gem.authors = ["akimatter"]
