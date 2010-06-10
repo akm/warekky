@@ -8,8 +8,17 @@ module Warekky
   autoload :CoreExt, 'warekky/core_ext'
 
   class << self
-    attr_accessor :era_group_class
-    attr_accessor :era_group
+    attr_writer :era_group
+    attr_writer :era_group_class
+
+    def era_group
+      @era_group ||= (era_group_class ? era_group_class.new : nil)
+    end
+
+    def era_group_class
+      @era_group_class = ::Warekky::Ja unless defined?(@era_group_class)
+      @era_group_class
+    end
 
     # d: Date or Time
     def strftime(d, format)
@@ -22,10 +31,6 @@ module Warekky
       era_group ? 
         era_group.parse(str, options) : 
         try_without(DateTime, :parse, str)
-    end
-
-    def era_group
-      @era_group ||= (era_group_class ? era_group_class.new : nil)
     end
 
     def [](era_name_or_date_or_time)
