@@ -8,6 +8,9 @@ warekkyは和暦サポートのためのライブラリです。
 
 == Simple Usage
  $ irb
+ require 'rubygems'
+ #=> false
+
  require 'warekky'
  #=> true
  
