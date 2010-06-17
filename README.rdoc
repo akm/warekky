@@ -8,13 +8,10 @@ warekkyは和暦サポートのためのライブラリです。
 
 == Simple Usage
  $ irb
- require 'rubygems'
- #=> false
-
- require 'warekky'
+ require 'rubygems'; require 'warekky'
  #=> true
  
- Date.new(2010, 6, 10).strftime("%g%n/%m/%d")
+ Date.new(2010, 6, 10).strftime("%g%N/%m/%d")
  #=> "H22/06/10"
  
  Time.parse("H22/06/10 19:07:20")
