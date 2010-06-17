@@ -24,7 +24,7 @@ module Warekky
     def strftime(d, format)
       era_group ? 
         era_group.strftime(d, format) : 
-        d.strftime(format)
+        try_without(d, :strftime, format)
     end
 
     def parse(str, options = {})
