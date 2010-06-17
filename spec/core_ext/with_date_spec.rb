@@ -14,7 +14,7 @@ describe "Warekky" do
     end
 
     it "with alphabet era name (アルファベット表記の元号)" do
-      fmt = '%g%n/%m/%d'
+      fmt = '%g%N/%m/%d'
       Date.new(1867,12,31).strftime(fmt).should == "1867/12/31"
       Date.new(1868, 1, 1).strftime(fmt).should == "M01/01/01"
       Date.new(1912, 7,29).strftime(fmt).should == "M45/07/29"
@@ -28,7 +28,7 @@ describe "Warekky" do
     end
 
     it "with chinese charactor era name (漢字表記の元号)" do
-      fmt = '%G%n/%m/%d'
+      fmt = '%G%N/%m/%d'
       Date.new(1867,12,31).strftime(fmt).should == "1867/12/31"
       Date.new(1868, 1, 1).strftime(fmt).should == "明治01/01/01"
       Date.new(1912, 7,29).strftime(fmt).should == "明治45/07/29"

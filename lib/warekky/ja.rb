@@ -17,7 +17,7 @@ module Warekky
     # strftimeで使える記号
     format('%G'){|era, era_year| era[:long] if era} # 明治/大正/昭和/平成
     format('%g'){|era, era_year| era.sign if era}   # M/T/S/H
-    format('%n'){|era, era_year| '%02d' % era_year} # (元号での)年度
+    format('%N'){|era, era_year| '%02d' % era_year} # (元号での)年度
 
     # parseで使われる元号毎の正規表現
     parse_regexp do |era|

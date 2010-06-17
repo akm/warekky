@@ -14,7 +14,7 @@ describe "Warekky" do
     end
 
     it "with alphabet era name (アルファベット表記の元号)" do
-      fmt = '%g%n/%m/%d'
+      fmt = '%g%N/%m/%d'
       Warekky.strftime(DateTime.new(1867,12,31), fmt).should == "1867/12/31"
       Warekky.strftime(DateTime.new(1868, 1, 1), fmt).should == "M01/01/01"
       Warekky.strftime(DateTime.new(1912, 7,29), fmt).should == "M45/07/29"
@@ -28,7 +28,7 @@ describe "Warekky" do
     end
 
     it "with chinese charactor era name (漢字表記の元号)" do
-      fmt = '%G%n/%m/%d'
+      fmt = '%G%N/%m/%d'
       Warekky.strftime(DateTime.new(1867,12,31), fmt).should == "1867/12/31"
       Warekky.strftime(DateTime.new(1868, 1, 1), fmt).should == "明治01/01/01"
       Warekky.strftime(DateTime.new(1912, 7,29), fmt).should == "明治45/07/29"
@@ -39,6 +39,20 @@ describe "Warekky" do
       Warekky.strftime(DateTime.new(1989, 1, 8), fmt).should == "平成01/01/08"
       Warekky.strftime(DateTime.new(2010, 6, 9), fmt).should == "平成22/06/09"
       Warekky.strftime(DateTime.new(2050,12,31), fmt).should == "平成62/12/31"
+    end
+
+    it "with chinese charactor era name (漢字表記の元号) %nの改行入り" do
+      fmt = '%G%N年%n%m月%n%d日'
+      Warekky.strftime(DateTime.new(1867,12,31), fmt).should == "1867年\n12月\n31日"
+      Warekky.strftime(DateTime.new(1868, 1, 1), fmt).should == "明治01年\n01月\n01日"
+      Warekky.strftime(DateTime.new(1912, 7,29), fmt).should == "明治45年\n07月\n29日"
+      Warekky.strftime(DateTime.new(1912, 7,30), fmt).should == "大正01年\n07月\n30日"
+      Warekky.strftime(DateTime.new(1926,12,24), fmt).should == "大正15年\n12月\n24日"
+      Warekky.strftime(DateTime.new(1926,12,25), fmt).should == "昭和01年\n12月\n25日"
+      Warekky.strftime(DateTime.new(1989, 1, 7), fmt).should == "昭和64年\n01月\n07日"
+      Warekky.strftime(DateTime.new(1989, 1, 8), fmt).should == "平成01年\n01月\n08日"
+      Warekky.strftime(DateTime.new(2010, 6, 9), fmt).should == "平成22年\n06月\n09日"
+      Warekky.strftime(DateTime.new(2050,12,31), fmt).should == "平成62年\n12月\n31日"
     end
   end
 

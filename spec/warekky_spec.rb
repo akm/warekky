@@ -10,8 +10,17 @@ describe Warekky::Era do
   describe :strftime do
     it "invoke original method" do
       d = Date.new(2010, 6, 10)
-      d.should_receive(:strftime).with("%Y/%m/%d")
-      Warekky.strftime(d, "%Y/%m/%d")
+      Warekky.strftime(d, "%Y/%m/%d").should == "2010/06/10"
+    end
+
+    it "%n means newline" do
+      d = Date.new(2010, 6, 10)
+      begin
+        Warekky.strftime(d, "%Y%n%m%n%d").should == "2010\n06\n10"
+      rescue Exception => e
+        puts e.backtrace.join("\n  ")
+        raise
+      end
     end
   end
 
